@@ -14,7 +14,7 @@ const LocalStrategy=require("passport-local");
 const User=require("./schemas/user");
 const cors=require("cors");
 app.use(cors({
-  origin: ['http://localhost:3000', 'http://localhost:3001'],
+  origin: [process.env.FRONTEND_URL, process.env.DASHBOARD_URL],
   credentials: true
 }));
 
@@ -45,7 +45,7 @@ passport.deserializeUser(User.deserializeUser());
 
  
 app.get("/signup",(req,res)=>{
-    res.redirect("http://localhost:3000/Signup");
+    res.redirect(`${process.env.FRONTEND_URL}/Signup`);
 })
 app.post("/signup", async (req, res) => {
   const { email, username, password } = req.body;
@@ -58,7 +58,7 @@ app.post("/signup", async (req, res) => {
   }
 });
 app.get("/login",(req,res)=>{
-    res.redirect("http://localhost:3000/Login");
+    res.redirect( `${FRONTEND_URL}/Login`);
 })
 
 

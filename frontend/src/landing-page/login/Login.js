@@ -2,6 +2,8 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 axios.defaults.withCredentials = true;
+const BACKEND_URL = process.env.BACKEND_URL;
+const DASHBOARD_URL=process.env.DASHBOARD_URL;
 
 const Login = () => {
   const [formData, setFormData] = useState({ username: '', password: '' });
@@ -14,9 +16,9 @@ const Login = () => {
   const handleSubmit = async e => {
     e.preventDefault();
     try {
-      const res = await axios.post('http://localhost:8080/login', formData);
+      const res = await axios.post(`${BACKEND_URL}/login`, formData);
       if (res.data.message === 'Login successful') {
-        window.location.href = 'http://localhost:3001/';
+        window.location.href = `${DASHBOARD_URL}/`;
       }
     } catch (err) {
       setErrorMessage(err.response?.data?.error || 'Login failed');

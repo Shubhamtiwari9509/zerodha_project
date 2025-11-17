@@ -3,12 +3,13 @@ import axios from "axios";
 import { VerticalGraph } from "./VerticalGraph";
 
 // import  {holdings} from "./data/data";
+const BACKEND_URL=process.env.BACKEND_URL;
 
 const Holdings = () => {
   const [allHoldings, setAllHoldings] = useState([]);
 
   useEffect(() => {
-    axios.get("http://localhost:8080/allHoldings").then((res) => {
+    axios.get(`${BACKEND_URL}/allHoldings`).then((res) => {
       // console.log(res.data);
       setAllHoldings(res.data);
     });

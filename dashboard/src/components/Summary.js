@@ -1,21 +1,22 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-
+const BACKEND_URL=process.env.BACKEND_URL;
+const FRONTEND_URL=process.env.FRONTEND_URL;
 const Summary = () => {
   const [username, setUsername] = useState("");
 
   useEffect(() => {
-    axios.get('http://localhost:8080/check-auth', { withCredentials: true })
+    axios.get(`${BACKEND_URL}/check-auth`, { withCredentials: true })
       .then(res => {
         if (res.data.authenticated) {
           setUsername(res.data.user.username);
         } else {
-          window.location.href = "http://localhost:3001/Login";
+          window.location.href = `${FRONTEND_URL}/Login`;
         }
       })
       .catch(err => {
         console.error('Auth check failed:', err);
-        window.location.href = "http://localhost:3001/Login";
+        window.location.href =  `${FRONTEND_URL}/Login`;
       });
   }, []);
 

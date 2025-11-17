@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+const BACKEND_URL = process.env.BACKEND_URL;
 function Navbar() {
     return ( 
         <nav
@@ -29,12 +30,12 @@ function Navbar() {
           <form class="d-flex" role="search">
             <ul class="navbar-nav mb-lg-0">
               <li class="nav-item">
-                <Link class="nav-link active" aria-current="page" to="http://localhost:8080/signup">
-                  Signup
+                <Link class="nav-link active" aria-current="page" to= {`${BACKEND_URL}/signup`}>
+                 Signup
                 </Link>
               </li>
               <li class="nav-item">
-                <Link class="nav-link active" aria-current="page" to="http://localhost:8080/login">
+                <Link class="nav-link active" aria-current="page" to={`${BACKEND_URL}/login`}>
                   Login
                 </Link>
               </li>

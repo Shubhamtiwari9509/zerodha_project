@@ -1,6 +1,8 @@
 // Signup.jsx
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+const BACKEND_URL = process.env.BACKEND_URL;
+const DASHBOARD_URL=process.env.DASHBOARD_URL;
 
 const Signup = () => {
   const [formData, setFormData] = useState({ username: '', email: '', password: '' });
@@ -14,11 +16,11 @@ const Signup = () => {
   const handleSubmit = async e => {
     e.preventDefault();
     try {
-      const res = await axios.post('http://localhost:8080/signup', formData);
+      const res = await axios.post(`${BACKEND_URL}/signup`, formData);
       setMessage(res.data.message);
       setError('');
       setTimeout(() => {
-        window.location.href = 'http://localhost:3001/';
+        window.location.href = `${DASHBOARD_URL}/`;
       }, 1500);
     } catch (err) {
       console.log(err);
