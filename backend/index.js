@@ -119,9 +119,6 @@ app.listen(port,()=>{
     console.log("Server Start");
     mongoose.connect(url);
     console.log("DB connected");
-    console.log(process.env.DASHBOARD_URL);
-    console.log(process.env.BACKEND_URL);
-    console.log(process.env.FRONTEND_URL);
 });
 
  
