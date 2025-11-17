@@ -6,7 +6,7 @@ import axios from "axios";
 import GeneralContext from "./GeneralContext";
 
 import "./BuyActionWindow.css";
-const BACKEND_URL=process.env.BACKEND_URL;
+const BACKEND_URL=process.env.REACT_APP_BACKEND_URL;
 
 const BuyActionWindow = ({ uid }) => {
   const [stockQuantity, setStockQuantity] = useState(1);

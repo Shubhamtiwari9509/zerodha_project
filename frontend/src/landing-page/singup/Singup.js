@@ -1,8 +1,8 @@
 // Signup.jsx
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-const BACKEND_URL = process.env.BACKEND_URL;
-const DASHBOARD_URL=process.env.DASHBOARD_URL;
+const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
+const DASHBOARD_URL=process.env.REACT_APP_DASHBOARD_URL;
 
 const Signup = () => {
   const [formData, setFormData] = useState({ username: '', email: '', password: '' });

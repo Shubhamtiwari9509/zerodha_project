@@ -2,8 +2,8 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import './Menu.css';
-const BACKEND_URL=process.env.BACKEND_URL;
-const FRONTEND_URL=process.env.FRONTEND_URL;
+const BACKEND_URL=process.env.REACT_APP_BACKEND_URL;
+const FRONTEND_URL=process.env.REACT_APP_FRONTEND_URL;
 const Menu = () => {
   const [selectedMenu, setSelectedMenu] = useState(0);
   const [isProfileDropdownOpen, setIsProfileDropdownOpen] = useState(false);

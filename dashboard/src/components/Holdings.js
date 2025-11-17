@@ -3,7 +3,7 @@ import axios from "axios";
 import { VerticalGraph } from "./VerticalGraph";
 
 // import  {holdings} from "./data/data";
-const BACKEND_URL=process.env.BACKEND_URL;
+const BACKEND_URL=process.env.REACT_APP_BACKEND_URL;
 
 const Holdings = () => {
   const [allHoldings, setAllHoldings] = useState([]);
