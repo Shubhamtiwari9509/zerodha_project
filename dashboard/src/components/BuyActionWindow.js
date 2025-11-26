@@ -1,26 +1,33 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-
 import axios from "axios";
 
 import GeneralContext from "./GeneralContext";
-
 import "./BuyActionWindow.css";
-// const BACKEND_URL=process.env.REACT_APP_BACKEND_URL;
+
+// ✅ Backend URL from environment
+const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 
 const BuyActionWindow = ({ uid }) => {
   const [stockQuantity, setStockQuantity] = useState(1);
   const [stockPrice, setStockPrice] = useState(0.0);
 
-  const handleBuyClick = () => {
-    axios.post("http://localhost:8080/newOrder", {
-      name: uid,
-      qty: stockQuantity,
-      price: stockPrice,
-      mode: "BUY",
-    });
-
-    GeneralContext.closeBuyWindow();
+  const handleBuyClick = async () => {
+    try {
+      await axios.post(
+        `${BACKEND_URL}/newOrder`,
+        {
+          name: uid,
+          qty: stockQuantity,
+          price: stockPrice,
+          mode: "BUY",
+        },
+        { withCredentials: true } // ✅ send cookies for session
+      );
+      GeneralContext.closeBuyWindow();
+    } catch (error) {
+      console.error("Order failed:", error);
+    }
   };
 
   const handleCancelClick = () => {

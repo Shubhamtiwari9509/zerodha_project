@@ -1,8 +1,9 @@
 // Signup.jsx
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-// const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
-// const DASHBOARD_URL=process.env.REACT_APP_DASHBOARD_URL;
+
+const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
+const DASHBOARD_URL = process.env.REACT_APP_DASHBOARD_URL;
 
 const Signup = () => {
   const [formData, setFormData] = useState({ username: '', email: '', password: '' });
@@ -16,15 +17,14 @@ const Signup = () => {
   const handleSubmit = async e => {
     e.preventDefault();
     try {
-      const res = await axios.post("http://localhost:8080/signup", formData, { withCredentials: true });
+      const res = await axios.post(`${BACKEND_URL}/signup`, formData, { withCredentials: true });
       setMessage(res.data.message);
       setError('');
       setTimeout(() => {
-        //dash
-        window.location.href = "http://localhost:3001/";
+        window.location.href = `${DASHBOARD_URL}/`;
       }, 1000);
     } catch (err) {
-      console.log(err);
+      console.error(err);
       setError(err.response?.data?.error || 'Signup failed');
       setMessage('');
     }
@@ -102,9 +102,30 @@ const Signup = () => {
         <div style={styles.heading}>Create your account</div>
         {message && <div style={styles.message}>{message}</div>}
         {error && <div style={styles.error}>{error}</div>}
-        <input style={styles.input} type="text" name="username" placeholder="Username" onChange={handleChange} required />
-        <input style={styles.input} type="email" name="email" placeholder="Email" onChange={handleChange} required />
-        <input style={styles.input} type="password" name="password" placeholder="Password" onChange={handleChange} required />
+        <input
+          style={styles.input}
+          type="text"
+          name="username"
+          placeholder="Username"
+          onChange={handleChange}
+          required
+        />
+        <input
+          style={styles.input}
+          type="email"
+          name="email"
+          placeholder="Email"
+          onChange={handleChange}
+          required
+        />
+        <input
+          style={styles.input}
+          type="password"
+          name="password"
+          placeholder="Password"
+          onChange={handleChange}
+          required
+        />
         <button style={styles.button} type="submit">Sign Up</button>
       </form>
     </div>

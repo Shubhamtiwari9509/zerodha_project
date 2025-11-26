@@ -1,7 +1,9 @@
 // Login.jsx
 import React, { useState } from 'react';
 import axios from 'axios';
- 
+
+const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
+const DASHBOARD_URL = process.env.REACT_APP_DASHBOARD_URL;
 
 const Login = () => {
   const [formData, setFormData] = useState({ username: '', password: '' });
@@ -14,12 +16,14 @@ const Login = () => {
   const handleSubmit = async e => {
     e.preventDefault();
     try {
-      const res = await axios.post("http://localhost:8080/login", formData ,{ withCredentials: true
-});
-     
+      const res = await axios.post(
+        `${BACKEND_URL}/login`,
+        formData,
+        { withCredentials: true }
+      );
+
       if (res.data.message === 'Login successful') {
-        //dash
-        window.location.href = "http://localhost:3001/";
+        window.location.href = `${DASHBOARD_URL}/`;
       }
     } catch (err) {
       setErrorMessage(err.response?.data?.error || 'Login failed');
@@ -79,8 +83,22 @@ const Login = () => {
     <div style={styles.wrapper}>
       <form style={styles.card} onSubmit={handleSubmit}>
         <div style={styles.heading}>Login to your account</div>
-        <input style={styles.input} type="text" name="username" placeholder="Username" onChange={handleChange} required />
-        <input style={styles.input} type="password" name="password" placeholder="Password" onChange={handleChange} required />
+        <input
+          style={styles.input}
+          type="text"
+          name="username"
+          placeholder="Username"
+          onChange={handleChange}
+          required
+        />
+        <input
+          style={styles.input}
+          type="password"
+          name="password"
+          placeholder="Password"
+          onChange={handleChange}
+          required
+        />
         <button style={styles.button} type="submit">Login</button>
         {errorMessage && <div style={styles.error}>{errorMessage}</div>}
       </form>

@@ -1,13 +1,16 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+
+const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
+
 function Navbar() {
-    return ( 
-        <nav
-      class="navbar navbar-expand-lg border-bottom  fixed-top "
+  return (
+    <nav
+      className="navbar navbar-expand-lg border-bottom fixed-top"
       style={{ backgroundColor: "#FFF" }}
     >
-      <div class="container p-2">
-        <Link class="navbar-brand" to="/">
+      <div className="container p-2">
+        <Link className="navbar-brand" to="/">
           <img
             src="media/images/logo.svg"
             style={{ width: "25%" }}
@@ -15,7 +18,7 @@ function Navbar() {
           />
         </Link>
         <button
-          class="navbar-toggler"
+          className="navbar-toggler"
           type="button"
           data-bs-toggle="collapse"
           data-bs-target="#navbarSupportedContent"
@@ -23,38 +26,44 @@ function Navbar() {
           aria-expanded="false"
           aria-label="Toggle navigation"
         >
-          <span class="navbar-toggler-icon"></span>
+          <span className="navbar-toggler-icon"></span>
         </button>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <form class="d-flex" role="search">
-            <ul class="navbar-nav mb-lg-0">
-              <li class="nav-item">
-                <Link class="nav-link active" aria-current="page" to="http://localhost:8080/signup">
-                 Signup
-                </Link>
+        <div className="collapse navbar-collapse" id="navbarSupportedContent">
+          <form className="d-flex" role="search">
+            <ul className="navbar-nav mb-lg-0">
+              <li className="nav-item">
+                <a
+                  className="nav-link active"
+                  href={`${BACKEND_URL}/signup`}
+                >
+                  Signup
+                </a>
               </li>
-              <li class="nav-item">
-                <Link class="nav-link active" aria-current="page" to="http://localhost:8080/login">
+              <li className="nav-item">
+                <a
+                  className="nav-link active"
+                  href={`${BACKEND_URL}/login`}
+                >
                   Login
-                </Link>
+                </a>
               </li>
-              <li class="nav-item">
-                <Link class="nav-link active" to="AboutPage">
+              <li className="nav-item">
+                <Link className="nav-link active" to="/AboutPage">
                   About
                 </Link>
               </li>
-              <li class="nav-item">
-                <Link class="nav-link active" to="Products">
+              <li className="nav-item">
+                <Link className="nav-link active" to="/Products">
                   Product
                 </Link>
               </li>
-              <li class="nav-item">
-                <Link class="nav-link active" to="Pricing">
+              <li className="nav-item">
+                <Link className="nav-link active" to="/Pricing">
                   Pricing
                 </Link>
               </li>
-              <li class="nav-item">
-                <Link class="nav-link active" to="Support">
+              <li className="nav-item">
+                <Link className="nav-link active" to="/Support">
                   Support
                 </Link>
               </li>
@@ -63,7 +72,7 @@ function Navbar() {
         </div>
       </div>
     </nav>
-     );
+  );
 }
 
 export default Navbar;

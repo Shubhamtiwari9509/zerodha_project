@@ -2,28 +2,31 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import './Menu.css';
-// const BACKEND_URL=process.env.REACT_APP_BACKEND_URL;
-// const FRONTEND_URL=process.env.REACT_APP_FRONTEND_URL;
+
+// ✅ URLs from environment
+const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
+const FRONTEND_URL = process.env.REACT_APP_FRONTEND_URL;
+
 const Menu = () => {
   const [selectedMenu, setSelectedMenu] = useState(0);
   const [isProfileDropdownOpen, setIsProfileDropdownOpen] = useState(false);
   const [username, setUsername] = useState('');
 
-
-  useEffect(()=>{
-    axios.get("http://localhost:8080/check-auth",{ withCredentials: true }).then((res)=>{
-      if(res.data.authenticated){
-        setUsername(res.data.user.username);
-      }
-      else{
-        window.location.href="http://localhost:3000/login";
-      }
-    })
-    .catch((err)=>{
-      console.error("Auth cheack failed",err);
-       window.location.href="http://localhost:3000/login";
-    })
-  },[]);
+  useEffect(() => {
+    axios
+      .get(`${BACKEND_URL}/check-auth`, { withCredentials: true })
+      .then((res) => {
+        if (res.data.authenticated) {
+          setUsername(res.data.user.username);
+        } else {
+          window.location.href = `${FRONTEND_URL}/login`;
+        }
+      })
+      .catch((err) => {
+        console.error("Auth check failed", err);
+        window.location.href = `${FRONTEND_URL}/login`;
+      });
+  }, []);
 
   useEffect(() => {
     const handleClickOutside = (e) => {
@@ -44,12 +47,12 @@ const Menu = () => {
   };
 
   const handleLogout = () => {
-    axios.get("http://localhost:8080/logout", { withCredentials: true })
+    axios
+      .get(`${BACKEND_URL}/logout`, { withCredentials: true })
       .then(() => {
-        //frontend 
-        window.location.href = "http://localhost:3000/"; 
+        window.location.href = `${FRONTEND_URL}/`;
       })
-      .catch(err => {
+      .catch((err) => {
         console.error('Logout failed:', err);
       });
   };
@@ -59,7 +62,7 @@ const Menu = () => {
 
   return (
     <div className="menu-container">
-      <img src="logo.png" style={{ width: "50px" }} />
+      <img src="logo.png" style={{ width: "50px" }} alt="logo" />
       <div className="menus">
         <ul>
           <li><Link style={{ textDecoration: "none" }} to="/" onClick={() => handleMenuClick(0)}><p className={selectedMenu === 0 ? activeMenuClass : menuClass}>Dashboard</p></Link></li>
@@ -78,8 +81,8 @@ const Menu = () => {
         {isProfileDropdownOpen && (
           <div className="profile-dropdown">
             <ul>
-              <li><Link to="/profile">My Profile</Link></li><br></br>
-              <li><Link to="/setting">Settings</Link></li><br></br>
+              <li><Link to="/profile">My Profile</Link></li><br />
+              <li><Link to="/setting">Settings</Link></li><br />
               <li><button onClick={handleLogout}>Logout</button></li>
             </ul>
           </div>
