@@ -34,8 +34,8 @@ app.use(session({
   saveUninitialized: false,
   cookie: {
   maxAge: 7 * 24 * 60 * 60 * 1000, 
-  sameSite: 'lax',                  
-  secure: true,                 
+  sameSite: 'lax',                   
+  secure: process.env.NODE_ENV === 'production'                
 }
 }));
 
